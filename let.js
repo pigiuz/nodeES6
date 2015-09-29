@@ -1,16 +1,15 @@
 'use strict'
+var fs = require("fs");
 
-function canAccessVarFromOuterScope(){
-    for(var i=0;i<1;i++)
-        console.log(i); // traces 0
-    console.log(i); // traces 1
+Array.prototype.last = function(){
+    return this[this.length-1];
 }
 
-function cannotAccessLetFromOuterScope(){
-	for(let i=0;i<1;i++)
-        console.log(i); // traces 0
-	console.log(i); // << this throws a ReferenceError: i is not defined
+var lastLine = undefined;
+if(lastLine === undefined){
+    let myFile = fs.readFileSync(__dirname+"/let.js","utf8");
+    lastLine = myFile.split("\n").last();
 }
-
-canAccessVarFromOuterScope();
-cannotAccessLetFromOuterScope();
+// console.log(lastLine); // try to declare myFile as a var and uncomment this line
+console.log(myFile);
+// I just wanted this line, but at least the rest of the file is NOT in memory!
