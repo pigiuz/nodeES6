@@ -8,6 +8,7 @@ people.add({name:"Jane", sex:"F"});
 
 let men = new WeakSet();
 
+// filtering collection
 people.forEach(function(person){
 	if(person.sex==="M"){men.add(person)} // still 1 reference!
 });
@@ -17,4 +18,5 @@ for(let person of people){
 }
 
 // releasing set will clear weakset as well!!
+// no need to call men.clear()
 people.clear();
