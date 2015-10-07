@@ -46,10 +46,15 @@ function benchmark(dataStructureName,times, elements, addFunction, clearFunction
 }
 
 
+function defaultTo(propertyName,defaultValue){
+	console.log(propertyName+" defaulted to "+defaultValue);
+	console.log("run: node "+__filename+" <elements> <iterations>");
+	return defaultValue;
+}
 
-let elements = process.argv.length>0? process.argv[2] : 1000;
-let times = process.argv.length>1? process.argv[3] : 1;
+let elements = process.argv.length>2? process.argv[2] : defaultTo("elements",1000);
+let iterations = process.argv.length>3? process.argv[3] : defaultTo("iterations",1);
 
-benchmark("array",times,elements,addToArray,function(){array.length=0});
-benchmark("object",times,elements,addToObject,function(){object = Object.create({}); size=0;});
-benchmark("set",times,elements,addToSet,function(){mySet.clear()});
+benchmark("array",iterations,elements,addToArray,function(){array.length=0});
+benchmark("object",iterations,elements,addToObject,function(){object = Object.create({}); size=0;});
+benchmark("set",iterations,elements,addToSet,function(){mySet.clear()});
